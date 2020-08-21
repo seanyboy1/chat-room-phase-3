@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0; padding: 0; 
+      box-sizing: border-box;
+    }
+
+    /* body {
+      background-color: rgb(184, 183, 183);
+    } */
+
+    form {
+        background: #000;
+        /* background: rgb(184, 183, 183);  */
+        padding: 3px; 
+        position: fixed; 
+        bottom: 0; 
+        width: 100%;
+    }
+
+    form input {
+        border: 0; 
+        padding: 10px; 
+        width: 90%; 
+        margin-right: 0.5%;
+    }
+
+    form button {
+        width: 9%; 
+        background: rgb(130, 224, 255); 
+        /* color: white; */
+        border: none; 
+        padding: 10px;
+    }
+
+    #messages {
+        list-style-type: none; 
+        margin: 0; 
+        padding: 0;
+    }
+
+    #messages li {
+        padding: 5px 10px;
+    }
+
+    #messages li:nth-child(odd) {
+        background: #eee;
+    }
+
+
+
+    #header {
+      text-align: center;
+    }
+
+    h1 {
+      color: maroon;
+      font-family: 'Special Elite', cursive;
+    }
+
+
+    /* select {
+            text-transform:capitalize;
+            color: gray;
+        }
+
+    select:focus {
+      outline: transparent;
+    }
+
+    #display-1 {
+      display: none;
+      text-align: center;
+    }
+
+    #input_text {
+      width: 50%;
+    }
+
+    #input_text:focus {
+      color: maroon;
+      outline: transparent;
+    }
+
+    #input_new_room {
+      margin: 4px;
+    }
+
+    #input_new_room:focus {
+      color: maroon;
+      outline: transparent;
+    }
+
+    #username_input {
+      text-align: center;
+    }
+
+    #username_input:focus {
+      color: maroon;
+      outline: transparent;
+
+    }
+
+    #username {
+      text-align: center;
+    }
+
+    #header {
+      text-align: center;
+    }
+
+    h1 {
+      color: maroon;
+      font-family: 'Special Elite', cursive;
+    }
+
+    #message {
+      text-align: justify;
+    } */
+
+  </style>
+</head>
+<body>
+    <div id="header">
+        <h1>Welcome to...Chatter</h1>
+    </div>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- <script>
+    $(function () {
+        var socket = io()
+        $('form').submit(function(e) {
+        e.preventDefault() // prevents page reloading
+        socket.emit('chat message', $('#m').val())
+        $('#m').val('')
+        return false
+        })
+    })
+    </script> -->
+    <script>
+        $(function () {
+          var socket = io()
+          $('form').submit(function(e){
+            e.preventDefault(); // prevents page reloading
+            socket.emit('chat message', $('#m').val())
+            $('#m').val('')
+            return false
+          })
+          socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg))
+          })
+        })
+      </script>
+  </body>
+</html>
+
+
