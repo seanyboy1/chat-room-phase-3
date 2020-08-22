@@ -32,7 +32,7 @@ const new_room_btn = document.querySelector('#new_room_btn')
 body.appendChild(username_el)
 
 chat_btn.addEventListener("click", event => {
-  postMessage(input_text.value, state.name, state.room)
+  socket.emit("chat message",input_text.value, state.name, state.room)
   input_text.value = ""
 })
 
@@ -44,6 +44,7 @@ new_room_btn.addEventListener("click", event => {
 
 chat_room.addEventListener("change", event => {
   state.room = chat_room.value
+  yo.update(el, Messages(messages.filter(value => value.room === state.room)))
 })
 
 // function postMessage (text) {
@@ -88,6 +89,25 @@ function renderMessages () {
 // setInterval(getMessages, 1000)
 
 renderMessages()
+
+var socket = io();
+
+let messages = []
+socket.on('chat message', function(text, nick, room){
+
+
+  messages.push({text: text, nick: nick, room: room})
+  console.log(nick)
+  console.log(room)
+  console.log(text)
+  
+  
+    // console.log(data.filter(value => value.room === state.room))
+    yo.update(el, Messages(messages.filter(value => value.room === state.room)))
+  
+  // $('#messages').append($('<li>').text(msg));
+});
+
 // setInterval(renderMessages, 1000)
 
 
@@ -95,6 +115,7 @@ getMessages().then(data => {
   console.log('sent GET request')
   console.log(data)
   const rooms = []
+  messages = data
   data.forEach(message => {
     if (!rooms.includes(message.room)) {
       rooms.push(message.room)

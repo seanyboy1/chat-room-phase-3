@@ -46,3 +46,5 @@
 {"text":"How are you?","nick":"Ralph","room":"tattoo","date":"2020-08-21T02:57:24.611Z"}
 {"text":"How are you?","nick":"Susie","room":"tattoo","date":"2020-08-21T03:06:06.532Z"}
 {"text":"Chicken","nick":"Brad","room":"food","date":"2020-08-21T03:37:21.073Z"}
+{"text":"hello guys","nick":"charliev","room":"food","date":"2020-08-22T01:31:12.276Z"}
+{"text":"hhhh","nick":"charliev","room":"tattoo","date":"2020-08-22T01:40:17.166Z"}

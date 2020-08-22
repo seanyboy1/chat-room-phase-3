@@ -36,8 +36,8 @@ app.get('/messages', function (req, res) {
 
 io.on('connection', (socket) => {
     console.log('A new chatter has joined the chat...')
-    socket.on('chat message', (msg) => {
-      io.emit('chat message', msg);
+    socket.on('chat message', (text, nick, room) => {
+      io.emit('chat message', text, nick, room);
     })
     socket.on('disconnect', () => {
         console.log('A chatter has left the chat...');
